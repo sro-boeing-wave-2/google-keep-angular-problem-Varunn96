@@ -1,0 +1,45 @@
+<section id="newNoteSection">
+  <form [formGroup]="noteForm" id="form" (ngSubmit)="onSubmit()">
+
+    <label>
+      <input type="text" maxlength="60" formControlName="Title" placeholder="Title">
+    </label>
+    <br>
+    <label>
+      <input type="text" maxlength="60" formControlName="Text" placeholder="Text">
+    </label>
+    <br>
+    <div formArrayName="CheckList">
+      <small><strong>CheckList</strong></small> <button type="button" mat-button color="primary" (click)="addCheckList()">Add New CheckList Item</button>
+      <div *ngFor="let cl of CheckList.controls; let i=index">
+        <div [formGroupName]="i" id="checklist">
+          <label id="checklabel">
+            <input type="text" maxlength="60" formControlName="checkListTitle" placeholder="Title" >
+          </label>
+
+          <label>
+            <mat-checkbox type="checkbox" formControlName="checkListStatus"> </mat-checkbox>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div formArrayName="Labels">
+      <small><strong>Labels</strong></small> <button type="button" mat-button color="primary" (click)="addLabel()">Add Label</button>
+      <div *ngFor="let label of Labels.controls; let i=index">
+        <div [formGroupName]="i">
+          <label>
+            <input type="text" maxlength="60" formControlName="labelName" placeholder="Label">
+          </label>
+        </div>
+      </div>
+    </div>
+    <label>
+      <mat-checkbox id="check" type="checkbox" formControlName="isPinned"></mat-checkbox><span><small>Pin Note</small></span>
+    </label>
+
+    <button mat-button color="primary" onclick="document.location.href='http://localhost:4200/notes'" type="submit" form="form" value="Submit" >Create</button>
+  </form>
+
+</section>
+<!-- onclick="document.location.href='http://localhost:4200/notes'" -->

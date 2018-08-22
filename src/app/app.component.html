@@ -1,0 +1,16 @@
+<mat-toolbar color="primary" id="toolbar">
+  <mat-toolbar-row>
+    <h1> <strong> This is like Google Keep </strong> </h1>
+    <span class="spacer"></span>
+    <span> <a routerLink="/notes" routerLinkActive="active"> Notes </a></span>
+    <span> <a routerLink="/pinnednotes" routerLinkActive="active"> Pinned Notes </a></span>
+    <span> <a routerLink="/labels" routerLinkActive="active"> Labels </a></span>
+    <span> <a routerLink="/search" routerLinkActive="active"> Search </a></span>
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<router-outlet></router-outlet>
+
+<footer>
+  <h6></h6>
+</footer>

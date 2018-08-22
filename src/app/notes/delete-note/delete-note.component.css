@@ -1,0 +1,14 @@
+app-delete-note {
+  padding: 50px;
+}
+
+section {
+  margin: auto;
+  margin-top: 200px;
+  align-content: center;
+  padding: 50px;
+  width: 450px;
+}
+button {
+  margin: 20px;
+}

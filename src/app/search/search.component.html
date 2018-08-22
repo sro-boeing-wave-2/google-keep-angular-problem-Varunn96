@@ -1,0 +1,37 @@
+
+<section id="search">
+  <input #title type="search" placeholder="Search"> <button mat-raised-button color="primary" (click) = "onClick(title.value)">Go</button>
+</section>
+
+
+<mat-card class="card">
+  <mat-card-header>
+    <mat-card-title><strong>{{note.title}}</strong></mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+
+    <p>{{note.text}}</p>
+
+    <mat-divider></mat-divider>
+
+    <strong>CheckList</strong>
+    <p *ngFor = "let checklist of note.checkList">
+      {{ checklist.checkListTitle }}
+    </p>
+
+    <mat-divider></mat-divider>
+
+    <strong>Label:</strong>
+    <p *ngFor = "let label of note.labels">
+      {{ label.labelName }}
+    </p>
+
+  </mat-card-content>
+  <p *ngIf = "note.isPinned == true">
+    <mat-grid-tile-footer>
+      Pinned
+    </mat-grid-tile-footer>
+  </p>
+  <mat-grid-tile-footer>
+    </mat-grid-tile-footer>
+
