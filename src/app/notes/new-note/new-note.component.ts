@@ -47,9 +47,9 @@ export class NewNoteComponent implements OnInit {
     }));
   }
 
-  onSubmit() {
+  async onSubmit() {
     console.log("I'm here");
-    this.service.AddNewNote(this.noteForm.value).subscribe();
+    await this.service.AddNewNote(this.noteForm.value).subscribe();
   }
 
 

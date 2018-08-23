@@ -36,10 +36,10 @@ strong {
   right: -90%;
 }
 
-.example-header-image {
+/* .example-header-image {
   background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
   background-size: cover;
-}
+} */
 
 .mat-card-footer {
   padding: 10px 10px 15px 0px;

@@ -4,7 +4,7 @@
       <mat-card class="card" *ngFor = "let note of notes">
 
         <mat-card-header>
-          <mat-card-title><strong>{{note.title}}</strong></mat-card-title>
+          <mat-card-title inline-edit="note.title"><strong>{{note.title}}</strong></mat-card-title>
         </mat-card-header>
 
         <mat-divider></mat-divider>

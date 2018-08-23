@@ -1,37 +1,61 @@
-
 <section id="search">
-  <input #title type="search" placeholder="Search"> <button mat-raised-button color="primary" (click) = "onClick(title.value)">Go</button>
+  <input #title type="search" placeholder="Search"> <button mat-raised-button color="primary" (click)="onClick(title.value)">Go</button>
 </section>
 
 
-<mat-card class="card">
+<mat-card class="card" *ngIf = "note">
+
   <mat-card-header>
     <mat-card-title><strong>{{note.title}}</strong></mat-card-title>
   </mat-card-header>
-  <mat-card-content>
 
+  <mat-divider></mat-divider>
+  <br>
+
+  <mat-card-content>
     <p>{{note.text}}</p>
 
     <mat-divider></mat-divider>
+    <br>
 
     <strong>CheckList</strong>
-    <p *ngFor = "let checklist of note.checkList">
+    <p *ngFor="let checklist of note.checkList">
       {{ checklist.checkListTitle }}
     </p>
 
     <mat-divider></mat-divider>
+    <br>
 
     <strong>Label:</strong>
-    <p *ngFor = "let label of note.labels">
+    <p *ngFor="let label of note.labels">
       {{ label.labelName }}
     </p>
-
   </mat-card-content>
-  <p *ngIf = "note.isPinned == true">
-    <mat-grid-tile-footer>
-      Pinned
-    </mat-grid-tile-footer>
-  </p>
-  <mat-grid-tile-footer>
-    </mat-grid-tile-footer>
 
+  <mat-divider></mat-divider>
+
+  <section *ngIf="note.isPinned == true">
+    <mat-card-footer id="pinned">
+      Pinned
+    </mat-card-footer>
+  </section>
+
+  <mat-card-footer>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button (click)="onClickEdit(note)" mat-menu-item>
+        <span>Edit</span>
+      </button>
+      <button (click)="onClickDelete(note)" mat-menu-item>
+        <span>Delete</span>
+      </button>
+    </mat-menu>
+  </mat-card-footer>
+
+</mat-card>
+
+<!-- <section *ngIf = "notenullcase">
+  <h3> Search for something else </h3>
+</section> -->

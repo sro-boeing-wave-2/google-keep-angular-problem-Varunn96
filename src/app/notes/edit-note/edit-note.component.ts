@@ -6,7 +6,7 @@ import { FormBuilder, FormArray } from '@angular/forms';
 @Component({
   selector: 'app-edit-note',
   templateUrl: './edit-note.component.html',
-  styleUrls: ['./edit-note.component.css']
+  styleUrls: ['../new-note/new-note.component.css']
 })
 
 export class EditNoteComponent implements OnInit {
@@ -14,22 +14,22 @@ export class EditNoteComponent implements OnInit {
   note;
   noteForm = this.fb.group({
     Title: [''],
-    PlainText: [''],
-    PinStatus: [false],
+    Text: [''],
+    isPinned: [false],
     CheckList: this.fb.array([
        this.fb.group({
-        CheckListData: [''],
-        ChickListStatus: [false]
+        checkListTitle: [''],
+        checkListStatus: [false]
       })
     ]),
     Labels: this.fb.array([
       this.fb.group({
-        LabelData: ['']
+        labelName: ['']
       })
     ])
   });
 
-  formSubmittedValues;
+  recievedNote;
 
   get CheckList() {
     return this.noteForm.get('CheckList') as FormArray;
@@ -41,14 +41,14 @@ export class EditNoteComponent implements OnInit {
 
   addCheckList() {
     this.CheckList.push(this.fb.group({
-      CheckListData: [''],
-      ChickListStatus: [false]
+      checkListTitle: [''],
+      checkListStatus: [false]
     }));
   }
 
   addLabel() {
     this.Labels.push(this.fb.group({
-      LabelData: ['']
+      labelName: ['']
     }));
   }
 
@@ -73,5 +73,35 @@ export class EditNoteComponent implements OnInit {
     });
   }
 
+  preProcessData(jsonObject) {
+    let copy = jsonObject;
+    if(copy["Title"] == ""){
+      console.log("HHHHHH");
+      delete copy["Title"];
+    }
+    if(copy["Text"] == ""){
+      delete copy["Text"];
+    }
+    if(copy["isPinned"] == false){
+      delete copy["isPinned"];
+    }
+    if(copy['CheckList'][0]['checkListTitle'] == ""){
+      delete copy['CheckList'];
+    }
+    if(copy['Labels'][0]['labelName'] == ""){
+      delete copy['Labels'];
+    }
 
+    return copy;
+  }
+
+  onSubmit() {
+    //console.log(JSON.stringify(this.noteForm.value));
+    this.noteForm.value['id'] = this.selectedId;
+    this.recievedNote = this.noteForm.value;
+    let copy = this.preProcessData(this.noteForm.value);
+    console.log(copy);
+    this._noteservice.EditExistingNote(this.selectedId, copy).subscribe();
+    this.router.navigate(["/notes"]);
+  }
 }
