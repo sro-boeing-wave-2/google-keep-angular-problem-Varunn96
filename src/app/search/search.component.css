@@ -22,6 +22,10 @@ input {
   color: white;
 }
 
+#status {
+  float: right;
+}
+
 #displayNotesSection {
   padding-left: 20px;
   padding-right: 20px;
@@ -91,4 +95,8 @@ h3 {
   text-align: center;
 }
 
+.mat-menu-item .mat-icon {
+  align-content: center;
+  margin-left: 35%;
+}
 

@@ -5,12 +5,15 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-labels',
   templateUrl: './labels.component.html',
-  styleUrls: ['../search/search.component.css']
+  styleUrls: ['../search/search.component.css', './labels.component.css']
 })
 export class LabelsComponent implements OnInit {
 
   givenlabel='';
   notes;
+  allnotes;
+  labels: string[] = [''];
+
   onClick(label) {
     this.givenlabel = label;
     this.service.GetByLabel(this.givenlabel)

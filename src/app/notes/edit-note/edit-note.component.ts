@@ -10,7 +10,7 @@ import { FormBuilder, FormArray } from '@angular/forms';
 })
 
 export class EditNoteComponent implements OnInit {
-  selectedId;
+  recievedId;
   note;
   noteForm = this.fb.group({
     Title: [''],
@@ -56,12 +56,13 @@ export class EditNoteComponent implements OnInit {
 
   ngOnInit() {
     this.activatedroute.paramMap.subscribe((params: ParamMap) => {
-      this.selectedId = parseInt(params.get('id'));
+      this.recievedId = parseInt(params.get('id'));
       //console.log(this.note);
     });
-    this.GetNote(this.selectedId).then((data)=> {
+    this.GetNote(this.recievedId).then((data)=> {
       this.note = data;
       console.log(this.note);
+      console.log('hi');
     }
     );
 
@@ -74,34 +75,35 @@ export class EditNoteComponent implements OnInit {
   }
 
   preProcessData(jsonObject) {
-    let copy = jsonObject;
-    if(copy["Title"] == ""){
-      console.log("HHHHHH");
-      delete copy["Title"];
+    let temp = jsonObject;
+    if(temp["title"] == ""){
+      temp["title"] = this.note['title'];
     }
-    if(copy["Text"] == ""){
-      delete copy["Text"];
+    if(temp["text"] == ""){
+      temp["text"] = this.note['text'];
     }
-    if(copy["isPinned"] == false){
-      delete copy["isPinned"];
+    if(temp["isPinned"] == false){
+      temp["isPinned"] = this.note['isPinned'];
     }
-    if(copy['CheckList'][0]['checkListTitle'] == ""){
-      delete copy['CheckList'];
+    if(temp['CheckList'][0]['checkListTitle'] == ""){
+      delete temp['CheckList'];
     }
-    if(copy['Labels'][0]['labelName'] == ""){
-      delete copy['Labels'];
+    if(temp['Labels'][0]['labelName'] == ""){
+      delete temp['Labels'];
     }
 
-    return copy;
+    return temp;
   }
 
   onSubmit() {
     //console.log(JSON.stringify(this.noteForm.value));
-    this.noteForm.value['id'] = this.selectedId;
+    this.noteForm.value['id'] = this.recievedId;
     this.recievedNote = this.noteForm.value;
-    let copy = this.preProcessData(this.noteForm.value);
-    console.log(copy);
-    this._noteservice.EditExistingNote(this.selectedId, copy).subscribe();
-    this.router.navigate(["/notes"]);
+    let temp = this.preProcessData(this.noteForm.value);
+    console.log('work');
+    this._noteservice.EditExistingNote(this.recievedId, temp).subscribe(() => this.router.navigate(["/notes"])
+  );
+
   }
 }
+

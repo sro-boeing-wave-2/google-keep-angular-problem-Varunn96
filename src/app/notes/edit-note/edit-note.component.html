@@ -1,5 +1,5 @@
 <section id="newNoteSection" *ngIf="note">
-  <form [formGroup]="noteForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="noteForm" id="form" (ngSubmit)="onSubmit()">
 
     <label>
       <input type="text" maxlength="60" formControlName="Title" placeholder="Title" [value]="note['title']">
@@ -10,7 +10,7 @@
     </label>
     <br>
     <div formArrayName="CheckList">
-      <small><strong>CheckList</strong></small><button id="btn-shift" mat-button color="primary" (click)="addCheckList()">Add New Checklist Item</button>
+      <small><strong>CheckList</strong></small><button type="button" id="btn-shift" mat-button color="primary" (click)="addCheckList()">Add New Checklist Item</button>
       <div *ngFor="let cl of CheckList.controls; let i=index">
         <div [formGroupName]="i">
           <label id="checklabel">
@@ -25,7 +25,7 @@
     </div>
 
     <div formArrayName="Labels">
-      <small><strong>Labels</strong></small> <button id="btn-shift" mat-button color="primary" (click)="addLabel()">Add Label</button>
+      <small><strong>Labels</strong></small> <button type="button" id="btn-shift" mat-button color="primary" (click)="addLabel()">Add Label</button>
       <div *ngFor="let label of Labels.controls; let i=index">
         <div [formGroupName]="i">
           <label>
@@ -37,6 +37,8 @@
     <label>
       <mat-checkbox id="check" type="checkbox" formControlName="isPinned"></mat-checkbox><span><small>Pin Note</small></span>
     </label>
-    <button mat-button color="primary" onclick="document.location.href='http://localhost:4200/notes'" type="submit" form="form" value="Submit" >Update</button>
+    <button mat-button color="primary"  type="submit" form="form" value="Submit">Update</button>
   </form>
 </section>
+
+<!-- onclick="document.location.href='http://localhost:4200/notes'" -->

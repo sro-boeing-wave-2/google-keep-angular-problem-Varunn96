@@ -22,12 +22,13 @@
         <strong>CheckList</strong>
         <p *ngFor="let checklist of note.checkList ">
           {{ checklist.checkListTitle }}
+          <span id="status" *ngIf = "checklist.checkListStatus == true"><mat-icon> done </mat-icon></span>
         </p>
 
         <mat-divider></mat-divider>
         <br>
 
-        <strong>Label:</strong>
+        <strong>Label</strong>
         <p *ngFor="let label of note.labels ">
           {{ label.labelName }}
         </p>
@@ -47,10 +48,10 @@
         </button>
         <mat-menu #menu="matMenu">
           <button (click)="onClickEdit(note)" mat-menu-item>
-            <span>Edit</span>
+            <span><mat-icon>edit</mat-icon></span>
           </button>
           <button (click)="onClickDelete(note)" mat-menu-item>
-            <span>Delete</span>
+            <span><mat-icon>delete</mat-icon></span>
           </button>
         </mat-menu>
       </mat-card-footer>
